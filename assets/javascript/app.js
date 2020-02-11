@@ -89,4 +89,5 @@ $(document).ready(function() {
 // MAIN PROCESS
 //============================================================
 
-// This is the code from Giphy
+// This is the code from Giphy2
+
