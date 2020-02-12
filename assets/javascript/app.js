@@ -12,7 +12,7 @@ var time = 60;
 //on page load, instructions are shown + start button
 $(document).ready(function() {
   $("<p>")
-    .text("Instructions Placeholder using JS, showing on start screen")
+    .text("")
     .appendTo(".top-section");
 
   //this is where the timer js happens
