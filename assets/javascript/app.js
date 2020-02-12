@@ -52,7 +52,7 @@ $(document).ready(function() {
   });
 
   $("<p>")
-    .text("Instructions Placeholder using JS, showing on start screen")
+    .text("")
     .appendTo(".top-section");
 
   //this is where the timer js happens
