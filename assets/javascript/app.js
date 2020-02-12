@@ -11,8 +11,48 @@ var time = 60;
 //============================================================
 //on page load, instructions are shown + start button
 $(document).ready(function() {
+  // Here we are building the URL we need to query API
+
+  var queryURL =
+    "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
+
+  // Here we run our AJAX call to the GIPHY API
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    //log the query URL
+    console.log(queryURL);
+    // we store all of the retreived data inside an object called "response"
+    console.log(response);
+    console.log(response.results[0].question);
+    var results = response.results;
+    console.log(results);
+
+    for (let i = 0; i < results.length; i++) {
+      //   const indivResult = results[i];
+      //   console.log(indivResult);
+      //loop through and pull out each q / create a var
+      const question = results[i].question;
+      console.log(question);
+      //Louis TherouxErrol Morris,Joe Berlinger,Adam Curtis
+      //also a var for answers (both correct + incorrect) this worked but it's not a pretty string
+      // const answers = results[i].correct_answer + results[i].incorrect_answers;
+      // console.log(answers);
+      const correctAns = results[i].correct_answer;
+      const incorrectAns = results[i].incorrect_answers;
+      console.log(correctAns);
+      console.log(incorrectAns);
+
+      //may need to display using a random func
+
+      //one var for incorrect and one for correct and display
+      //if else statement to check against it
+    }
+  });
+
   $("<p>")
-    .text("Instructions Placeholder using JS, showing on start screen")
+    .text("")
     .appendTo(".top-section");
 
   //this is where the timer js happens
@@ -76,6 +116,7 @@ $(document).ready(function() {
     //timer counts down from 60 seconds (displayed on screen)
     $("#timer").text("1:00");
   });
+
   //on last question, button changes to 'Finish'
   function timeoutOrDone() {
     clearInterval(intervalId);
@@ -91,3 +132,21 @@ $(document).ready(function() {
 
 // This is the code from Giphy2
 
+function displayGifs() {
+  var queryURL = "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+
+  // Creates AJAX call for the specific gif button being clicked
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+
+    // Retrieving the URL for the image
+    var imgURL = response.data.images.fixed_height.url;
+    var image = $("<img>").attr("src", imgURL);
+    $("#gifCont").append(image);
+
+  });
+}
+$(document).on("click", "#button", displayGifs);
