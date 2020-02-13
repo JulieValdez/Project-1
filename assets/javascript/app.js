@@ -133,3 +133,23 @@ $(document).ready(function() {
 //============================================================
 // MAIN PROCESS
 //============================================================
+// This is the code from Giphy2
+
+function displayGifs() {
+  var queryURL =
+    "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+
+  // Creates AJAX call for the specific gif button being clicked
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+
+    // Retrieving the URL for the image
+    var imgURL = response.data.images.fixed_height.url;
+    var image = $("<img>").attr("src", imgURL);
+    $("#gifCont").append(image);
+  });
+}
+$(document).on("click", "#button", displayGifs);
