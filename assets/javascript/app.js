@@ -27,32 +27,43 @@ $(document).ready(function() {
     console.log(response);
     console.log(response.results[0].question);
     var results = response.results;
-    console.log(results);
+    console.log(results); //array of objects
 
     for (let i = 0; i < results.length; i++) {
-      const indivResult = results[i];
-      //   console.log(indivResult);
+      console.log(results[i]); //object
       //loop through and pull out each q / create a var
-      const question = results[i].question;
-      console.log(question);
+      const questions = results[i].question;
 
-      const correctAns = results[i].correct_answer; //string
-      const answers = results[i].incorrect_answers; //array
-      answers.push(correctAns);
-      console.log(correctAns);
-
-      //need to display using a random func
-      answers.sort(function() {
-        return 0.5 - Math.random();
-      });
-      console.log(answers);
-
-      var paragraph1 = $("<p>");
-
-      //will need a click listener on each answer...when click on answ and will have to compare
-
-      //if else statement to check against it
+      console.log(questions);
     }
+
+    //   for (let j = 0; j < questions.length; j++) {
+    //     // const currentQuestion = questions[j];
+    //     console.log(questions[j]);//indiv letters
+
+    //
+
+    // var questionDiv = $("<h3>");
+    // questionDiv.addClass("question");
+    // console.log(indivResult.question[i]);
+
+    // questionDiv.text(indivResult.question);
+    // $("#questionCont").append(questionDiv);
+
+    const correctAns = results[i].correct_answer; //string
+    const answers = results[i].incorrect_answers; //array
+    answers.push(correctAns);
+    console.log(correctAns);
+
+    //need to display using a random func
+    answers.sort(function() {
+      return 0.5 - Math.random();
+    });
+    console.log(answers);
+
+    //will need a click listener on each answer...when click on answ and will have to compare
+
+    //if else statement to check against it
   });
 
   $("<p>")
