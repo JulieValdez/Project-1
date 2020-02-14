@@ -134,6 +134,7 @@ $(document).ready(function() {
     var queryURL =
       "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
 
+
     // Creates AJAX call for the specific gif button being clicked
     $.ajax({
       url: queryURL,
