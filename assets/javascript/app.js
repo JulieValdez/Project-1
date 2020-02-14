@@ -130,7 +130,8 @@ $(document).ready(function() {
       "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
 
 function displayGifs() {
-  var queryURL = "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+  var queryURL =
+    "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
 
   // Creates AJAX call for the specific gif button being clicked
   $.ajax({
@@ -143,8 +144,6 @@ function displayGifs() {
     var imgURL = response.data.images.fixed_height.url;
     var image = $("<img>").attr("src", imgURL);
     $("#gifCont").append(image);
-
   });
 }
 $(document).on("click", "#button", displayGifs);
-
