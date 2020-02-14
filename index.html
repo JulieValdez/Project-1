@@ -19,40 +19,52 @@
 
   <div class="container">
 
-  <div class="row">
-    <div id="header" class="col-12">
-      <h1>So You Think You Can Trivia?</h1>
-   </div>
-  </div>
-
-  <br>
- 
-
-  <!-- Main Section -->
-  <div class="row">
-    <div id="main" class="col-12">
-  
-      <h3>Get ready to play</h3>
-    
-      <p>Test your trivia knowledge with this multiple choice trivia game. You have 60 seconds to answer all the questions and the game ends automatically when time has elapsed. Good luck! </p>
+    <div class="jumbotron jumbotron-fluid bg-transparent">
+      <div class="container">
+        <p class="display-4 text-center">Trivial Party</p>
+        <p class="lead"></p>
+      </div>
     </div>
-  </div>
+    <!-- Countdown Timer -->
+    <div id="timer"></div>
 
-  <div class="row">
-      <!-- Countdown Timer -->
-      <div id="timer"></div>
-      <!-- Joke Container -->
+    <hr class="mt-2 mb-5">
+  
+    <!-- Main Section that appears on button click-->
+
+    <div class="row">
+      <!-- Question Container -->
       <div id="questionCont"></div>
       <!-- Gif Container -->
       <div id="gifCont"></div>
-      <button id="button">Start</button>
+    </div>
+  
+    <!-- Main Section that disappears on button click-->
+
+    <div class="row justify-content-md-center starter">
+      <div class="col-md">
+        <img class="img-fluid img-thumbnail mx-auto d-block" src="https://media2.giphy.com/media/tXL4FHPSnVJ0A/200_d.gif?cid=fe1dc334b0f4620cabfed41f9474028bbcf0b774821619e4&rid=200.gif" alt="">
+      </div>
+      <div class="col-md">
+        <p>Test your trivia knowledge. </p>
+        <p> You have 60 seconds to answer all the questions. </p>
+        <button id="button" type="button" class="btn text-center btn-primary btn-lg btn-block">Play Already</button>
+      </div>
+      <div class="col-md">
+        <img class="img-fluid img-thumbnail mx-auto d-block" src="https://media2.giphy.com/media/8TT8VjZTZGWQw/200.gif?cid=fe1dc334b0f4620cabfed41f9474028bbcf0b774821619e4&rid=200.gif" alt="">
+      </div>
     </div>
 
+  <hr class="mt-2 mb-5">
+
+  </div>
+
+
+
+
  
-
-
-    <div id="footer">
-      Copyright &copy; Team B Project-1 2020
+  <div class="fixed-bottom footer">
+    Copyright &copy; Team B Project-1 2020
   </div>
 
 </div>

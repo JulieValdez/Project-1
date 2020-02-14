@@ -120,12 +120,12 @@ $(document).ready(function() {
 
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
   $("#button").on("click", function() {
-    $("p").hide();
+    $(".starter").hide();
     $("#button").text("");
     $("#button").text("Next");
     $("<p>")
       .text("Questions Text Placeholder")
-      .appendTo("#jokesCont");
+      .appendTo("#questionCont");
     //start func called
     start();
     //timer counts down from 60 seconds (displayed on screen)
