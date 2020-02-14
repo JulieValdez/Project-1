@@ -1,58 +1,54 @@
-console.log("app file connected");
 //============================================================
 //GLOBAL VARIABLES
 //============================================================
 var intervalId;
 var clockRunning = false;
 var time = 60;
+var questions;
+var questionNumber = 0;
 
 //============================================================
 // FUNCTIONS
 //============================================================
 //on page load, instructions are shown + start button
 $(document).ready(function() {
+  $("#questionCont").hide();
+  $("#gifCont").hide();
   // Here we are building the URL we need to query API
 
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
+  function renderQuestion() {
+    console.log(questions);
+    var questionDiv = $("<div>").html(questions[questionNumber].question);
 
-  // Here we run our AJAX call to the GIPHY API
+    $("#questionCont").append(questionDiv);
+  }
+  // Here we run our AJAX call to the trivia API
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    //log the query URL
-    console.log(queryURL);
-    // we store all of the retreived data inside an object called "response"
-    console.log(response);
-    console.log(response.results[0].question);
-    var results = response.results;
-    console.log(results);
+    questions = response.results;
 
-    for (let i = 0; i < results.length; i++) {
-      //   const indivResult = results[i];
-      //   console.log(indivResult);
-      //loop through and pull out each q / create a var
-      const question = results[i].question;
-      console.log(question);
-      //Louis TherouxErrol Morris,Joe Berlinger,Adam Curtis
-      //also a var for answers (both correct + incorrect) this worked but it's not a pretty string
-      // const answers = results[i].correct_answer + results[i].incorrect_answers;
-      // console.log(answers);
-      const correctAns = results[i].correct_answer;
-      const incorrectAns = results[i].incorrect_answers;
-      console.log(correctAns);
-      console.log(incorrectAns);
+    // const correctAns = results[i].correct_answer; //string
+    // const answers = results[i].incorrect_answers; //array
+    // answers.push(correctAns);
+    // console.log(correctAns);
 
-      //may need to display using a random func
+    // //need to display using a random func
+    // answers.sort(function() {
+    //   return 0.5 - Math.random();
+    // });
+    // console.log(answers);
 
-      //one var for incorrect and one for correct and display
-      //if else statement to check against it
-    }
+    //will need a click listener on each answer...when click on answ and will have to compare
+
+    //if else statement to check against it?
   });
 
   $("<p>")
-    .text("")
+    .text("Instructions Placeholder using JS, showing on start screen")
     .appendTo(".top-section");
 
   //this is where the timer js happens
@@ -104,13 +100,14 @@ $(document).ready(function() {
   }
 
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
-  $("#button").on("click", function() {
-    $("p").hide();
-    $("#button").text("");
-    $("#button").text("Next");
-    $("<p>")
-      .text("Questions Text Placeholder")
-      .appendTo("#jokesCont");
+
+  $("#start-button").on("click", function() {
+    $("#start-button").hide();
+    $("#instructions").hide();
+    $("#questionCont").show();
+    $("#gifCont").show();
+    displayGifs();
+    renderQuestion();
     //start func called
     start();
     //timer counts down from 60 seconds (displayed on screen)
@@ -123,14 +120,14 @@ $(document).ready(function() {
     //if timer runs out or user clicks Finish
     $("#timer").text("0:00");
   }
-});
-//when game over score shown: x/10, gif shown depending on their 'grade' and button /message that says: do you want to play again?
 
-//============================================================
-// MAIN PROCESS
-//============================================================
+  //when game over score shown: x/10, gif shown depending on their 'grade' and button /message that says: do you want to play again?
 
-// This is the code from Giphy2
+  // This is the code from Giphy2
+
+  function displayGifs() {
+    var queryURL =
+      "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
 
 function displayGifs() {
   var queryURL = "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
@@ -150,3 +147,4 @@ function displayGifs() {
   });
 }
 $(document).on("click", "#button", displayGifs);
+
