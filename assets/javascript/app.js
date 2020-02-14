@@ -27,32 +27,47 @@ $(document).ready(function() {
     console.log(response);
     console.log(response.results[0].question);
     var results = response.results;
-    console.log(results);
+    console.log(results); //array of objects
 
     for (let i = 0; i < results.length; i++) {
-      //   const indivResult = results[i];
-      //   console.log(indivResult);
+      console.log(results[i]); //object
       //loop through and pull out each q / create a var
-      const question = results[i].question;
-      console.log(question);
-      //Louis TherouxErrol Morris,Joe Berlinger,Adam Curtis
-      //also a var for answers (both correct + incorrect) this worked but it's not a pretty string
-      // const answers = results[i].correct_answer + results[i].incorrect_answers;
-      // console.log(answers);
-      const correctAns = results[i].correct_answer;
-      const incorrectAns = results[i].incorrect_answers;
-      console.log(correctAns);
-      console.log(incorrectAns);
+      const questions = results[i].question;
 
-      //may need to display using a random func
-
-      //one var for incorrect and one for correct and display
-      //if else statement to check against it
+      console.log(questions);
     }
+
+    //   for (let j = 0; j < questions.length; j++) {
+    //     // const currentQuestion = questions[j];
+    //     console.log(questions[j]);//indiv letters
+
+    //
+
+    // var questionDiv = $("<h3>");
+    // questionDiv.addClass("question");
+    // console.log(indivResult.question[i]);
+
+    // questionDiv.text(indivResult.question);
+    // $("#questionCont").append(questionDiv);
+
+    const correctAns = results[i].correct_answer; //string
+    const answers = results[i].incorrect_answers; //array
+    answers.push(correctAns);
+    console.log(correctAns);
+
+    //need to display using a random func
+    answers.sort(function() {
+      return 0.5 - Math.random();
+    });
+    console.log(answers);
+
+    //will need a click listener on each answer...when click on answ and will have to compare
+
+    //if else statement to check against it
   });
 
   $("<p>")
-    .text("")
+    .text("Instructions Placeholder using JS, showing on start screen")
     .appendTo(".top-section");
 
   //this is where the timer js happens
@@ -129,11 +144,11 @@ $(document).ready(function() {
 //============================================================
 // MAIN PROCESS
 //============================================================
-
 // This is the code from Giphy2
 
 function displayGifs() {
-  var queryURL = "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+  var queryURL =
+    "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
 
   // Creates AJAX call for the specific gif button being clicked
   $.ajax({
@@ -146,7 +161,6 @@ function displayGifs() {
     var imgURL = response.data.images.fixed_height.url;
     var image = $("<img>").attr("src", imgURL);
     $("#gifCont").append(image);
-
   });
 }
 $(document).on("click", "#button", displayGifs);
