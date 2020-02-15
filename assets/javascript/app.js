@@ -8,6 +8,7 @@ var questions;
 var questionNumber = 0;
 var correct = 0;
 var incorrect = 0;
+var correctAns;
 
 //============================================================
 // FUNCTIONS
@@ -16,7 +17,7 @@ var incorrect = 0;
 $(document).ready(function() {
   $("#questionCont").hide();
   $("#gifCont").hide();
-  // Here we are building the URL we need to query API
+
   $(document).on("click", ".answerBtn", function(e) {
     clickedButton(e);
   });
@@ -24,24 +25,24 @@ $(document).ready(function() {
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
-    console.log(questions);
     var questionDiv = $("<div>").html(questions[questionNumber].question);
 
     $("#questionCont").append(questionDiv);
   }
 
   function renderAnswers() {
-    const correctAns = questions[questionNumber].correct_answer;
-    const answers = questions[questionNumber].incorrect_answers;
+    correctAns = questions[questionNumber].correct_answer;
+    console.log(correctAns);
+
+    var answers = questions[questionNumber].incorrect_answers;
     answers.push(correctAns);
     answers.sort(function() {
       return 0.5 - Math.random();
     });
-    console.log(correctAns);
-    console.log(answers);
+
     for (let i = 0; i < answers.length; i++) {
       var answerBtn = answers[i];
-      console.log(answerBtn);
+
       answerBtn = $("<button>");
       answerBtn.addClass("answerBtn");
       answerBtn.attr("data-name", answers[i]);
@@ -73,25 +74,20 @@ $(document).ready(function() {
 
   //this is where the timer js happens
   function start() {
-    console.log("start func working");
-
     // Use setInterval to start the count here and set the clock to running...for 1 minute
     if (!clockRunning) {
       intervalId = setInterval(count, 1000);
       clockRunning = true;
-      console.log("clock's running");
     }
   }
 
   function count() {
     // decrement time by 1
     time--;
-    console.log("count", time);
 
     //  Get the current time, pass that into the timeConverter function,
     //       and save the result in a variable.
     var converted = timeConverter(time);
-    console.log(converted);
 
     // Use the variable we just created to show the converted time in the "time-remaining" div.
     $("#timer").text(converted);
@@ -135,8 +131,21 @@ $(document).ready(function() {
   });
 
   function clickedButton(e) {
-    event.preventDefault();
+    e.preventDefault();
     console.log("button clicked");
+    console.log(e.target.getAttribute("data-name"));
+    console.log($(this));
+    console.log(e.target);
+
+    console.log(correctAns);
+
+    if (e.target.getAttribute("data-name") === correctAns) {
+      correct++;
+      console.log("correct");
+    } else {
+      incorrect++;
+      console.log("incorrect");
+    }
 
     nextQuestion();
   }
@@ -160,8 +169,6 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response);
-
       // Retrieving the URL for the image
       var imgURL = response.data.images.fixed_height.url;
       var image = $("<img>").attr("src", imgURL);
