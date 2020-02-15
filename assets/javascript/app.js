@@ -15,6 +15,9 @@ $(document).ready(function() {
   $("#questionCont").hide();
   $("#gifCont").hide();
   // Here we are building the URL we need to query API
+  $(document).on("click", ".answerBtn", function(e) {
+    clickedButton(e);
+  });
 
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
@@ -31,12 +34,15 @@ $(document).ready(function() {
     answers.push(correctAns);
     console.log(correctAns);
     console.log(answers);
-
-    // //need to display using a random func
-    // answers.sort(function() {
-    //   return 0.5 - Math.random();
-    // });
-    // console.log(answers);
+    for (let i = 0; i < answers.length; i++) {
+      var answerBtn = answers[i];
+      console.log(answerBtn);
+      answerBtn = $("<button>");
+      answerBtn.addClass("answerBtn");
+      answerBtn.attr("data-name", answers[i]);
+      answerBtn.html(answers[i]);
+      $("#questionCont").append(answerBtn);
+    }
   }
 
   // Here we run our AJAX call to the trivia API
@@ -51,9 +57,14 @@ $(document).ready(function() {
     //if else statement to check against it?
   });
 
-  $("<p>")
-    .text("Instructions Placeholder using JS, showing on start screen")
-    .appendTo(".top-section");
+  function nextQuestion() {
+    $("#questionCont").empty();
+    $("#gifCont").empty();
+    questionNumber++;
+    renderQuestion();
+    renderAnswers();
+    displayGifs();
+  }
 
   //this is where the timer js happens
   function start() {
@@ -119,6 +130,12 @@ $(document).ready(function() {
     $("#timer").text("1:00");
   });
 
+  function clickedButton(e) {
+    event.preventDefault();
+    console.log("button clicked");
+
+    nextQuestion();
+  }
   //on last question, button changes to 'Finish'
   function timeoutOrDone() {
     clearInterval(intervalId);
