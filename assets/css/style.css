@@ -49,6 +49,11 @@ h3 {
     text-align: center;
 }
 
+#questionCont {
+    font-family: 'Lobster', arial;
+    font-size: 40px;
+}
+
 /*REEEEEEEEEEESPONSIVE*/
 @media (max-width: 650px) {
     
