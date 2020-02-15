@@ -119,8 +119,7 @@ $(document).ready(function() {
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
 
   $("#start-button").on("click", function() {
-    $("#start-button").hide();
-    $("#instructions").hide();
+    $("#start-container").hide();
     $("#questionCont").show();
     $("#gifCont").show();
     displayGifs();
