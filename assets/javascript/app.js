@@ -64,6 +64,7 @@ $(document).ready(function() {
 
   function nextQuestion() {
     $("#questionCont").empty();
+    $("#gifCont").empty();
     questionNumber++;
     renderQuestion();
     renderAnswers();
