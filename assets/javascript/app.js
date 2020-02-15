@@ -3,7 +3,7 @@
 //============================================================
 var intervalId;
 var clockRunning = false;
-var time = 120;
+var time = 60;
 var questions;
 var questionNumber = 0;
 
@@ -12,12 +12,11 @@ var questionNumber = 0;
 //============================================================
 //on page load, instructions are shown + start button
 $(document).ready(function() {
-  $("#questionCont").hide();
-  $("#gifCont").hide();
+  // $("#questionCont").hide();
+  // $("#gifCont").hide();
+  $(".gameContent").hide();
+
   // Here we are building the URL we need to query API
-  $(document).on("click", ".answerBtn", function(e) {
-    clickedButton(e);
-  });
 
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
@@ -27,24 +26,6 @@ $(document).ready(function() {
 
     $("#questionCont").append(questionDiv);
   }
-
-  function renderAnswers() {
-    const correctAns = questions[questionNumber].correct_answer;
-    const answers = questions[questionNumber].incorrect_answers;
-    answers.push(correctAns);
-    console.log(correctAns);
-    console.log(answers);
-    for (let i = 0; i < answers.length; i++) {
-      var answerBtn = answers[i];
-      console.log(answerBtn);
-      answerBtn = $("<button>");
-      answerBtn.addClass("answerBtn");
-      answerBtn.attr("data-name", answers[i]);
-      answerBtn.html(answers[i]);
-      $("#questionCont").append(answerBtn);
-    }
-  }
-
   // Here we run our AJAX call to the trivia API
   $.ajax({
     url: queryURL,
@@ -52,19 +33,25 @@ $(document).ready(function() {
   }).then(function(response) {
     questions = response.results;
 
+    // const correctAns = results[i].correct_answer; //string
+    // const answers = results[i].incorrect_answers; //array
+    // answers.push(correctAns);
+    // console.log(correctAns);
+
+    // //need to display using a random func
+    // answers.sort(function() {
+    //   return 0.5 - Math.random();
+    // });
+    // console.log(answers);
+
     //will need a click listener on each answer...when click on answ and will have to compare
 
     //if else statement to check against it?
   });
 
-  function nextQuestion() {
-    $("#questionCont").empty();
-    $("#gifCont").empty();
-    questionNumber++;
-    renderQuestion();
-    renderAnswers();
-    displayGifs();
-  }
+  $("<p>")
+    .text("Instructions Placeholder using JS, showing on start screen")
+    .appendTo(".top-section");
 
   //this is where the timer js happens
   function start() {
@@ -117,25 +104,18 @@ $(document).ready(function() {
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
 
   $("#start-button").on("click", function() {
-    $("#start-button").hide();
-    $("#instructions").hide();
-    $("#questionCont").show();
-    $("#gifCont").show();
+    $(".starter").hide();
+    $(".gameContent").show();
+    // $("#questionCont").show();
+    // $("#gifCont").show();
     displayGifs();
     renderQuestion();
-    renderAnswers();
     //start func called
     start();
-    //timer counts down from 120 seconds (displayed on screen)
-    $("#timer").text("2:00");
+    //timer counts down from 60 seconds (displayed on screen)
+    $("#timer").text("1:00");
   });
 
-  function clickedButton(e) {
-    event.preventDefault();
-    console.log("button clicked");
-
-    nextQuestion();
-  }
   //on last question, button changes to 'Finish'
   function timeoutOrDone() {
     clearInterval(intervalId);
@@ -147,23 +127,24 @@ $(document).ready(function() {
 
   // This is the code from Giphy2
 
-  function displayGifs() {
-    var queryURL =
-      "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+function displayGifs() {
+  var queryURL =
+    "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
 
+  // Creates AJAX call for the specific gif button being clicked
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
 
-    // Creates AJAX call for the specific gif button being clicked
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function(response) {
-      console.log(response);
-
-      // Retrieving the URL for the image
-      var imgURL = response.data.images.fixed_height.url;
-      var image = $("<img>").attr("src", imgURL);
-      $("#gifCont").append(image);
-    });
-    $(document).on("click", "#button", displayGifs);
+    // Retrieving the URL for the image
+    var imgURL = response.data.images.fixed_height.url;
+    var image = $("<img>").attr("src", imgURL);
+    $("#gifCont").append(image);
+  });
+  console.log("gifs displayed");
+}
   }
-});
+);
+
