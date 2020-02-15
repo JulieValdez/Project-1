@@ -6,6 +6,8 @@ var clockRunning = false;
 var time = 60;
 var questions;
 var questionNumber = 0;
+var correct = 0;
+var incorrect = 0;
 
 //============================================================
 // FUNCTIONS
@@ -29,14 +31,27 @@ $(document).ready(function() {
     const correctAns = questions[questionNumber].correct_answer;
     const answers = questions[questionNumber].incorrect_answers;
     answers.push(correctAns);
+    answers.sort(function() {
+      return 0.5 - Math.random();
+    });
     console.log(correctAns);
     console.log(answers);
+    for (let i = 0; i < answers.length; i++) {
+      var answerBtn = answers[i];
+      console.log(answerBtn);
+      answerBtn = $("<button>");
+      answerBtn.addClass("answerBtn");
+      answerBtn.attr("data-name", answers[i]);
+      answerBtn.html(answers[i]);
+      $("#questionCont").append(answerBtn);
+    }
 
-    // //need to display using a random func
-    // answers.sort(function() {
-    //   return 0.5 - Math.random();
-    // });
-    // console.log(answers);
+    function nextQuestion() {
+      questionNumber++;
+      renderQuestion();
+      renderAnswers();
+      displayGifs();
+    }
   }
 
   // Here we run our AJAX call to the trivia API
@@ -50,10 +65,6 @@ $(document).ready(function() {
 
     //if else statement to check against it?
   });
-
-  $("<p>")
-    .text("Instructions Placeholder using JS, showing on start screen")
-    .appendTo(".top-section");
 
   //this is where the timer js happens
   function start() {
@@ -106,8 +117,7 @@ $(document).ready(function() {
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
 
   $("#start-button").on("click", function() {
-    $("#start-button").hide();
-    $("#instructions").hide();
+    $("#start-container").hide();
     $("#questionCont").show();
     $("#gifCont").show();
     displayGifs();
@@ -119,6 +129,9 @@ $(document).ready(function() {
     $("#timer").text("1:00");
   });
 
+  $(".answer-button").on("click", function() {
+    nextQuestion();
+  });
   //on last question, button changes to 'Finish'
   function timeoutOrDone() {
     clearInterval(intervalId);
@@ -133,7 +146,6 @@ $(document).ready(function() {
   function displayGifs() {
     var queryURL =
       "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
-
 
     // Creates AJAX call for the specific gif button being clicked
     $.ajax({
