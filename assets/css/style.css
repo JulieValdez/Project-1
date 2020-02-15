@@ -1,6 +1,6 @@
 body {
-    background-color: rgb(205, 195, 50);
-    
+	background-image: url("../images/gray.jpg");
+    background-size: 75%;
 }
 
 
@@ -31,45 +31,26 @@ h3 {
     font-size: 48px;
     text-shadow: 4px 4px 4px #aaa;
 }
- 
- #instructions{
-    background-color: #ff8566;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-family: 'Lobster', arial;
-    font-size: 20px;
-    text-shadow: 4px 4px 4px #aaa;
-}
-#content {
-    padding: 10px;
-}
 
 #button {
     align-content: center;
 }
 
 
-
-#main {
-    width: 600px;
-    float: right;
-    align-items: center;
-
-
-}
-
-#footer {
-    clear: both;
+.footer {
     padding: 10px;
-    background-color: #999999 ;
-    color: white;
-    text-align: right;
+    color: black;
+    text-align: center;
 }
 
 #timer {
     font-size:2.5em;
     text-align: center;
+}
+
+#questionCont {
+    font-family: 'Lobster', arial;
+    font-size: 40px;
 }
 
 /*REEEEEEEEEEESPONSIVE*/
