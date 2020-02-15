@@ -11,7 +11,6 @@ var correct = 0;
 var incorrect = 0;
 var correctAns;
 
-
 //============================================================
 // FUNCTIONS
 //============================================================
@@ -42,7 +41,6 @@ $(document).ready(function() {
     answers.sort(function() {
       return 0.5 - Math.random();
     });
-
 
     console.log(correctAns);
     console.log(answers);
@@ -140,11 +138,7 @@ $(document).ready(function() {
 
   function clickedButton(e) {
     e.preventDefault();
-    console.log("button clicked");
     console.log(e.target.getAttribute("data-name"));
-    console.log($(this));
-    console.log(e.target);
-
     console.log(correctAns);
 
     if (e.target.getAttribute("data-name") === correctAns) {
@@ -171,7 +165,6 @@ $(document).ready(function() {
   function displayGifs() {
     var queryURL =
       "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
-
 
     // Creates AJAX call for the specific gif button being clicked
     $.ajax({
