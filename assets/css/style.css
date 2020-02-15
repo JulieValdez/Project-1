@@ -32,30 +32,16 @@ h3 {
     text-shadow: 4px 4px 4px #aaa;
 }
 
-#content {
-    padding: 10px;
-}
 
 #button {
     align-content: center;
 }
 
 
-
-#main {
-    width: 600px;
-    float: right;
-    align-items: center;
-
-
-}
-
-#footer {
-    clear: both;
+.footer {
     padding: 10px;
-    background-color: #999999 ;
-    color: white;
-    text-align: right;
+    color: black;
+    text-align: center;
 }
 
 #timer {
