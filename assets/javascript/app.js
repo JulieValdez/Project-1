@@ -26,8 +26,7 @@ $(document).ready(function() {
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
     var questionDiv = $("<div>")
-      .html(questions[questionNumber].question)
-      .addClass("text-center mb-4");
+      .html(questions[questionNumber].question);
 
     $("#questionCont").append(questionDiv);
   }
