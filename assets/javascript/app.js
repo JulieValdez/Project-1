@@ -131,6 +131,7 @@ $(document).ready(function() {
     $(".gameContent").show();
     // $("#questionCont").show();
     // $("#gifCont").show();
+
     displayGifs();
     renderQuestion();
     //start func called
