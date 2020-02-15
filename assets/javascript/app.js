@@ -1,18 +1,58 @@
-console.log("app file connected");
 //============================================================
 //GLOBAL VARIABLES
 //============================================================
 var intervalId;
 var clockRunning = false;
 var time = 60;
+var questions;
+var questionNumber = 0;
 
 //============================================================
 // FUNCTIONS
 //============================================================
 //on page load, instructions are shown + start button
 $(document).ready(function() {
+  $("#questionCont").hide();
+  $("#gifCont").hide();
+  // Here we are building the URL we need to query API
+
+  var queryURL =
+    "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
+  function renderQuestion() {
+    console.log(questions);
+    var questionDiv = $("<div>").html(questions[questionNumber].question);
+
+    $("#questionCont").append(questionDiv);
+  }
+
+  function renderAnswers() {
+    const correctAns = questions[questionNumber].correct_answer;
+    const answers = questions[questionNumber].incorrect_answers;
+    answers.push(correctAns);
+    console.log(correctAns);
+    console.log(answers);
+
+    // //need to display using a random func
+    // answers.sort(function() {
+    //   return 0.5 - Math.random();
+    // });
+    // console.log(answers);
+  }
+
+  // Here we run our AJAX call to the trivia API
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    questions = response.results;
+
+    //will need a click listener on each answer...when click on answ and will have to compare
+
+    //if else statement to check against it?
+  });
+
   $("<p>")
-    .text("")
+    .text("Instructions Placeholder using JS, showing on start screen")
     .appendTo(".top-section");
 
   //this is where the timer js happens
@@ -64,30 +104,49 @@ $(document).ready(function() {
   }
 
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
-  $("#button").on("click", function() {
-    $("p").hide();
-    $("#button").text("");
-    $("#button").text("Next");
-    $("<p>")
-      .text("Questions Text Placeholder")
-      .appendTo("#jokesCont");
+
+  $("#start-button").on("click", function() {
+    $("#start-button").hide();
+    $("#instructions").hide();
+    $("#questionCont").show();
+    $("#gifCont").show();
+    displayGifs();
+    renderQuestion();
+    renderAnswers();
     //start func called
     start();
     //timer counts down from 60 seconds (displayed on screen)
     $("#timer").text("1:00");
   });
+
   //on last question, button changes to 'Finish'
   function timeoutOrDone() {
     clearInterval(intervalId);
     //if timer runs out or user clicks Finish
     $("#timer").text("0:00");
   }
+
+  //when game over score shown: x/10, gif shown depending on their 'grade' and button /message that says: do you want to play again?
+
+  // This is the code from Giphy2
+
+  function displayGifs() {
+    var queryURL =
+      "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+
+
+    // Creates AJAX call for the specific gif button being clicked
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+
+      // Retrieving the URL for the image
+      var imgURL = response.data.images.fixed_height.url;
+      var image = $("<img>").attr("src", imgURL);
+      $("#gifCont").append(image);
+    });
+    $(document).on("click", "#button", displayGifs);
+  }
 });
-//when game over score shown: x/10, gif shown depending on their 'grade' and button /message that says: do you want to play again?
-
-//============================================================
-// MAIN PROCESS
-//============================================================
-
-// This is the code from Giphy2
-

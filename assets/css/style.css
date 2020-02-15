@@ -1,5 +1,5 @@
 body {
-    background-color: #EEE;
+    background-color: #ffffff;
     font-family: Arial, Helvetica, Arial, sans-serif;
 }
 a {
@@ -22,9 +22,8 @@ h3 {
 }
 #container {
     background-color: white;
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 500px;
+    margin:auto;
 }
 
 #header {
@@ -60,3 +59,21 @@ h3 {
     text-align: right;
 }
 
+#timer {
+    font-size:2.5em;
+    text-align: center;
+}
+
+/*REEEEEEEEEEESPONSIVE*/
+@media (max-width: 650px) {
+    
+    #container{
+      width: 100%;
+    }
+    
+    p{
+      font-size:1.5em;
+    }
+  
+  }
+  
