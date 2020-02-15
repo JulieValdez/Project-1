@@ -3,9 +3,10 @@
 //============================================================
 var intervalId;
 var clockRunning = false;
-var time = 60;
+var time = 120;
 var questions;
 var questionNumber = 0;
+
 var correct = 0;
 var incorrect = 0;
 var correctAns;
@@ -15,10 +16,8 @@ var correctAns;
 //============================================================
 //on page load, instructions are shown + start button
 $(document).ready(function() {
-  // $("#questionCont").hide();
-  // $("#gifCont").hide();
-    // Here we are building the URL we need to query API
-  $(".gameContent").hide();
+  $("#questionCont").hide();
+  $("#gifCont").hide();
 
   $(document).on("click", ".answerBtn", function(e) {
     clickedButton(e);
@@ -27,7 +26,9 @@ $(document).ready(function() {
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
-    var questionDiv = $("<div>").html(questions[questionNumber].question).addClass("text-center mb-4");
+    var questionDiv = $("<div>")
+      .html(questions[questionNumber].question)
+      .addClass("text-center mb-4");
 
     $("#questionCont").append(questionDiv);
   }
@@ -42,6 +43,9 @@ $(document).ready(function() {
     answers.sort(function() {
       return 0.5 - Math.random();
     });
+
+    console.log(correctAns);
+    console.log(answers);
 
     for (let i = 0; i < answers.length; i++) {
       var answerBtn = answers[i];
@@ -61,25 +65,19 @@ $(document).ready(function() {
   }).then(function(response) {
     questions = response.results;
 
-    // const correctAns = results[i].correct_answer; //string
-    // const answers = results[i].incorrect_answers; //array
-    // answers.push(correctAns);
-    // console.log(correctAns);
-
-    // //need to display using a random func
-    // answers.sort(function() {
-    //   return 0.5 - Math.random();
-    // });
-    // console.log(answers);
-
     //will need a click listener on each answer...when click on answ and will have to compare
 
     //if else statement to check against it?
   });
 
-  $("<p>")
-    .text("Instructions Placeholder using JS, showing on start screen")
-    .appendTo(".top-section");
+  function nextQuestion() {
+    $("#questionCont").empty();
+    $("#gifCont").empty();
+    questionNumber++;
+    renderQuestion();
+    renderAnswers();
+    displayGifs();
+  }
 
   //this is where the timer js happens
   function start() {
@@ -127,17 +125,17 @@ $(document).ready(function() {
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
 
   $("#start-button").on("click", function() {
-    $(".starter").hide();
-    $(".gameContent").show();
-    // $("#questionCont").show();
-    // $("#gifCont").show();
-
+    $("#start-button").hide();
+    $("#instructions").hide();
+    $("#questionCont").show();
+    $("#gifCont").show();
     displayGifs();
     renderQuestion();
+    renderAnswers();
     //start func called
     start();
-    //timer counts down from 60 seconds (displayed on screen)
-    $("#timer").text("1:00");
+    //timer counts down from 120 seconds (displayed on screen)
+    $("#timer").text("2:00");
   });
 
   function clickedButton(e) {
@@ -166,24 +164,24 @@ $(document).ready(function() {
 
   // This is the code from Giphy2
 
-function displayGifs() {
-  var queryURL =
-    "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+  function displayGifs() {
+    var queryURL =
+      "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
 
-  // Creates AJAX call for the specific gif button being clicked
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response) {
-    console.log(response);
+    // Creates AJAX call for the specific gif button being clicked
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
 
-    // Retrieving the URL for the image
-    var imgURL = response.data.images.fixed_height.url;
-    var image = $("<img>").attr("src", imgURL).addClass("img-fluid img-thumbnail mx-auto d-block");
-    $("#gifCont").append(image);
-  });
-  console.log("gifs displayed");
-}
+      // Retrieving the URL for the image
+      var imgURL = response.data.images.fixed_height.url;
+      var image = $("<img>")
+        .attr("src", imgURL)
+        .addClass("img-fluid img-thumbnail mx-auto d-block");
+      $("#gifCont").append(image);
+    });
+    console.log("gifs displayed");
   }
-);
-
+});
