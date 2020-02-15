@@ -1,69 +1,64 @@
 body {
-	background-image: url("../images/gray.jpg");
-    background-size: 75%;
+  background-image: url("../images/gray.jpg");
+  background-size: 75%;
 }
-
-
 
 p {
-    text-align: center;
+  text-align: center;
 }
 
-h1, h2, h3 {
-    margin: 0;
+h1,
+h2,
+h3 {
+  margin: 0;
 }
 
 h3 {
-    text-align: center;
+  text-align: center;
 }
 #container {
-    background-color: white;
-    width: 500px;
-    margin:auto;
+  background-color: white;
+  width: 500px;
+  margin: auto;
 }
 
 #header {
-    background-color: #66CCFF;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    font-family: 'Lobster', arial;
-    font-size: 48px;
-    text-shadow: 4px 4px 4px #aaa;
+  background-color: #66ccff;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-family: "Lobster", arial;
+  font-size: 48px;
+  text-shadow: 4px 4px 4px #aaa;
 }
-
 
 #button {
-    align-content: center;
+  align-content: center;
 }
 
-
 .footer {
-    padding: 10px;
-    color: black;
-    text-align: center;
+  padding: 10px;
+  color: black;
+  text-align: center;
 }
 
 #timer {
-    font-size:2.5em;
-    text-align: center;
+  font-size: 2.5em;
+  text-align: center;
 }
 
 #questionCont {
-    font-family: 'Lobster', arial;
-    font-size: 40px;
+  font-family: "Lobster", arial;
+  font-size: 20px;
 }
 
 /*REEEEEEEEEEESPONSIVE*/
 @media (max-width: 650px) {
-    
-    #container{
-      width: 100%;
-    }
-    
-    p{
-      font-size:1.5em;
-    }
-  
+  #container {
+    width: 100%;
   }
-  
+
+  p {
+    font-size: 1.5em;
+  }
+}
