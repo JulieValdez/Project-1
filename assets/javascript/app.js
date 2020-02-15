@@ -6,7 +6,6 @@ var clockRunning = false;
 var time = 120;
 var questions;
 var questionNumber = 0;
-
 var correct = 0;
 var incorrect = 0;
 var correctAns;
@@ -41,9 +40,6 @@ $(document).ready(function() {
     answers.sort(function() {
       return 0.5 - Math.random();
     });
-
-    console.log(correctAns);
-    console.log(answers);
 
     for (let i = 0; i < answers.length; i++) {
       var answerBtn = answers[i];
