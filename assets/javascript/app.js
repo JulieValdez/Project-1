@@ -9,6 +9,7 @@ var questionNumber = 0;
 var correct = 0;
 var incorrect = 0;
 var correctAns;
+var answers;
 
 //============================================================
 // FUNCTIONS
@@ -21,13 +22,16 @@ $(document).ready(function() {
     clickedButton(e);
   });
 
+  $(document).on("click", ".playAgain", function(e) {
+    resetGame();
+  });
+
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
     console.log(questionNumber); // 19
     console.log(questions.length); // 20
-    var questionDiv = $("<div>")
-      .html(questions[questionNumber].question);
+    var questionDiv = $("<div>").html(questions[questionNumber].question);
 
     $("#questionCont").append(questionDiv);
   }
@@ -35,7 +39,7 @@ $(document).ready(function() {
   function renderAnswers() {
     correctAns = questions[questionNumber].correct_answer;
 
-    var answers = questions[questionNumber].incorrect_answers;
+    answers = questions[questionNumber].incorrect_answers;
     answers.push(correctAns);
 
     answers.sort(function() {
@@ -149,12 +153,22 @@ $(document).ready(function() {
 
     clearInterval(intervalId);
     //if timer runs out or...if question Num is less than or equal to questions.length
-    $("#timer").text("0:00 and correct answers");
+    $("#timer").text("0:00");
+    var correctDisplay = $("<p class='finalDisplay'>").text(
+      "correct: " + correct
+    );
+    var incorrectDisplay = $("<p class='finalDisplay'>").text(
+      "incorrect: " + incorrect
+    );
+    $("#questionCont").append(correctDisplay);
+    $("#questionCont").append(incorrectDisplay);
+
+    playAgainButton = $("<button>");
+    playAgainButton.addClass("playAgain");
+
+    playAgainButton.text("Play Again");
+    $("#questionCont").append(playAgainButton);
   }
-
-  //when game over score shown: x/10, gif shown depending on their 'grade' and button /message that says: do you want to play again?
-
-  // This is the code from Giphy2
 
   function displayGifs() {
     var queryURL =
@@ -175,5 +189,22 @@ $(document).ready(function() {
       $("#gifCont").append(image);
     });
     console.log("gifs displayed");
+  }
+
+  function resetGame() {
+    clockRunning = false;
+    time = 120;
+    questionNumber = 0;
+    correct = 0;
+    incorrect = 0;
+
+    correctAns;
+    displayGifs();
+    renderQuestion();
+    renderAnswers();
+    start();
+    $("#timer").text("2:00");
+    $(".finalDisplay").hide();
+    $(".playAgain").hide();
   }
 });

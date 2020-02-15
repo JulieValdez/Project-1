@@ -48,7 +48,7 @@ h3 {
 }
 
 #questionCont {
-  font-family: "Lobster", arial;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -56,12 +56,11 @@ h3 {
 }
 
 #answerCont {
-font-family: "Lobster", arial;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-
 }
 
 /*REEEEEEEEEEESPONSIVE*/
