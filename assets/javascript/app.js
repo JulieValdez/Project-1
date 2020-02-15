@@ -6,11 +6,9 @@ var clockRunning = false;
 var time = 60;
 var questions;
 var questionNumber = 0;
-
 var correct = 0;
 var incorrect = 0;
 var correctAns;
-
 
 //============================================================
 // FUNCTIONS
@@ -44,10 +42,6 @@ $(document).ready(function() {
     answers.sort(function() {
       return 0.5 - Math.random();
     });
-
-
-    console.log(correctAns);
-    console.log(answers);
 
     for (let i = 0; i < answers.length; i++) {
       var answerBtn = answers[i];
@@ -147,11 +141,7 @@ $(document).ready(function() {
 
   function clickedButton(e) {
     e.preventDefault();
-    console.log("button clicked");
     console.log(e.target.getAttribute("data-name"));
-    console.log($(this));
-    console.log(e.target);
-
     console.log(correctAns);
 
     if (e.target.getAttribute("data-name") === correctAns) {
