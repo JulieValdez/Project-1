@@ -17,6 +17,9 @@ $(document).ready(function() {
   $("#questionCont").hide();
   $("#gifCont").hide();
   // Here we are building the URL we need to query API
+  $(document).on("click", ".answerBtn", function(e) {
+    clickedButton(e);
+  });
 
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
@@ -45,13 +48,6 @@ $(document).ready(function() {
       answerBtn.html(answers[i]);
       $("#questionCont").append(answerBtn);
     }
-
-    function nextQuestion() {
-      questionNumber++;
-      renderQuestion();
-      renderAnswers();
-      displayGifs();
-    }
   }
 
   // Here we run our AJAX call to the trivia API
@@ -65,6 +61,14 @@ $(document).ready(function() {
 
     //if else statement to check against it?
   });
+
+  function nextQuestion() {
+    $("#questionCont").empty();
+    questionNumber++;
+    renderQuestion();
+    renderAnswers();
+    displayGifs();
+  }
 
   //this is where the timer js happens
   function start() {
@@ -129,9 +133,12 @@ $(document).ready(function() {
     $("#timer").text("1:00");
   });
 
-  $(".answer-button").on("click", function() {
+  function clickedButton(e) {
+    event.preventDefault();
+    console.log("button clicked");
+
     nextQuestion();
-  });
+  }
   //on last question, button changes to 'Finish'
   function timeoutOrDone() {
     clearInterval(intervalId);
