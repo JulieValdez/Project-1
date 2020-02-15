@@ -6,9 +6,11 @@ var clockRunning = false;
 var time = 120;
 var questions;
 var questionNumber = 0;
+
 var correct = 0;
 var incorrect = 0;
 var correctAns;
+
 
 //============================================================
 // FUNCTIONS
@@ -36,9 +38,14 @@ $(document).ready(function() {
 
     var answers = questions[questionNumber].incorrect_answers;
     answers.push(correctAns);
+
     answers.sort(function() {
       return 0.5 - Math.random();
     });
+
+
+    console.log(correctAns);
+    console.log(answers);
 
     for (let i = 0; i < answers.length; i++) {
       var answerBtn = answers[i];
@@ -118,7 +125,8 @@ $(document).ready(function() {
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
 
   $("#start-button").on("click", function() {
-    $("#start-container").hide();
+    $("#start-button").hide();
+    $("#instructions").hide();
     $("#questionCont").show();
     $("#gifCont").show();
     displayGifs();
@@ -163,6 +171,7 @@ $(document).ready(function() {
   function displayGifs() {
     var queryURL =
       "https://api.giphy.com/v1/gifs/random?tag=bored&rating=PG&api_key=pAxeLmVndZQ5FT6mm6fQieZRFPAFaSJi";
+
 
     // Creates AJAX call for the specific gif button being clicked
     $.ajax({
