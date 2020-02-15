@@ -6,7 +6,6 @@ var clockRunning = false;
 var time = 120;
 var questions;
 var questionNumber = 0;
-
 var correct = 0;
 var incorrect = 0;
 var correctAns;
@@ -25,6 +24,8 @@ $(document).ready(function() {
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
+    console.log(questionNumber); // 19
+    console.log(questions.length); // 20
     var questionDiv = $("<div>")
       .html(questions[questionNumber].question);
 
@@ -33,7 +34,6 @@ $(document).ready(function() {
 
   function renderAnswers() {
     correctAns = questions[questionNumber].correct_answer;
-    console.log(correctAns);
 
     var answers = questions[questionNumber].incorrect_answers;
     answers.push(correctAns);
@@ -41,9 +41,6 @@ $(document).ready(function() {
     answers.sort(function() {
       return 0.5 - Math.random();
     });
-
-    console.log(correctAns);
-    console.log(answers);
 
     for (let i = 0; i < answers.length; i++) {
       var answerBtn = answers[i];
@@ -62,10 +59,6 @@ $(document).ready(function() {
     method: "GET"
   }).then(function(response) {
     questions = response.results;
-
-    //will need a click listener on each answer...when click on answ and will have to compare
-
-    //if else statement to check against it?
   });
 
   function nextQuestion() {
@@ -73,9 +66,14 @@ $(document).ready(function() {
     $("#answerCont").empty();
     $("#gifCont").empty();
     questionNumber++;
-    renderQuestion();
-    renderAnswers();
-    displayGifs();
+
+    if (questionNumber === questions.length) {
+      timeoutOrDone();
+    } else {
+      renderQuestion();
+      renderAnswers();
+      displayGifs();
+    }
   }
 
   //this is where the timer js happens
@@ -137,24 +135,21 @@ $(document).ready(function() {
 
   function clickedButton(e) {
     e.preventDefault();
-    console.log(e.target.getAttribute("data-name"));
-    console.log(correctAns);
 
     if (e.target.getAttribute("data-name") === correctAns) {
       correct++;
-      console.log("correct");
     } else {
       incorrect++;
-      console.log("incorrect");
     }
-
     nextQuestion();
   }
   //on last question, button changes to 'Finish'
   function timeoutOrDone() {
+    console.log("timeoutordoneworking");
+
     clearInterval(intervalId);
-    //if timer runs out or user clicks Finish
-    $("#timer").text("0:00");
+    //if timer runs out or...if question Num is less than or equal to questions.length
+    $("#timer").text("0:00 and correct answers");
   }
 
   //when game over score shown: x/10, gif shown depending on their 'grade' and button /message that says: do you want to play again?
