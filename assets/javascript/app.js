@@ -16,8 +16,7 @@ var correctAns;
 //============================================================
 //on page load, instructions are shown + start button
 $(document).ready(function() {
-  $("#questionCont").hide();
-  $("#gifCont").hide();
+  $(".gameContent").hide();
 
   $(document).on("click", ".answerBtn", function(e) {
     clickedButton(e);
@@ -54,7 +53,7 @@ $(document).ready(function() {
       answerBtn.addClass("answerBtn");
       answerBtn.attr("data-name", answers[i]);
       answerBtn.html(answers[i]);
-      $("#questionCont").append(answerBtn);
+      $("#answerCont").append(answerBtn);
     }
   }
 
@@ -72,6 +71,7 @@ $(document).ready(function() {
 
   function nextQuestion() {
     $("#questionCont").empty();
+    $("#answerCont").empty();
     $("#gifCont").empty();
     questionNumber++;
     renderQuestion();
@@ -125,10 +125,8 @@ $(document).ready(function() {
   //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
 
   $("#start-button").on("click", function() {
-    $("#start-button").hide();
-    $("#instructions").hide();
-    $("#questionCont").show();
-    $("#gifCont").show();
+    $(".starter").hide();
+    $(".gameContent").show();
     displayGifs();
     renderQuestion();
     renderAnswers();
