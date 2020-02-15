@@ -23,7 +23,7 @@ $(document).ready(function() {
   });
 
   $(document).on("click", ".playAgain", function(e) {
-    resetGame();
+    window.location.reload();
   });
 
   var queryURL =
@@ -191,20 +191,20 @@ $(document).ready(function() {
     console.log("gifs displayed");
   }
 
-  function resetGame() {
-    clockRunning = false;
-    time = 120;
-    questionNumber = 0;
-    correct = 0;
-    incorrect = 0;
+  // function resetGame() {
+  //   clockRunning = false;
+  //   time = 120;
+  //   questionNumber = 0;
+  //   correct = 0;
+  //   incorrect = 0;
 
-    correctAns;
-    displayGifs();
-    renderQuestion();
-    renderAnswers();
-    start();
-    $("#timer").text("2:00");
-    $(".finalDisplay").hide();
-    $(".playAgain").hide();
-  }
+  //   correctAns;
+  //   displayGifs();
+  //   renderQuestion();
+  //   renderAnswers();
+  //   start();
+  //   $("#timer").text("2:00");
+  //   $(".finalDisplay").hide();
+  //   $(".playAgain").hide();
+  // }
 });
