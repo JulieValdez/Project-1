@@ -26,7 +26,9 @@ $(document).ready(function() {
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
-    var questionDiv = $("<div>").html(questions[questionNumber].question);
+    var questionDiv = $("<div>")
+      .html(questions[questionNumber].question)
+      .addClass("text-center mb-4");
 
     $("#questionCont").append(questionDiv);
   }
@@ -171,11 +173,15 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
+      console.log(response);
+
       // Retrieving the URL for the image
       var imgURL = response.data.images.fixed_height.url;
-      var image = $("<img>").attr("src", imgURL);
+      var image = $("<img>")
+        .attr("src", imgURL)
+        .addClass("img-fluid img-thumbnail mx-auto d-block");
       $("#gifCont").append(image);
     });
-    $(document).on("click", "#button", displayGifs);
+    console.log("gifs displayed");
   }
 });

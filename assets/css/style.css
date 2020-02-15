@@ -1,6 +1,6 @@
 body {
-    background-color: plum;
-    
+	background-image: url("../images/gray.jpg");
+    background-size: 75%;
 }
 
 
@@ -47,6 +47,11 @@ h3 {
 #timer {
     font-size:2.5em;
     text-align: center;
+}
+
+#questionCont {
+    font-family: 'Lobster', arial;
+    font-size: 40px;
 }
 
 /*REEEEEEEEEEESPONSIVE*/
