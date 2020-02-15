@@ -3,7 +3,7 @@
 //============================================================
 var intervalId;
 var clockRunning = false;
-var time = 60;
+var time = 120;
 var questions;
 var questionNumber = 0;
 
@@ -126,8 +126,8 @@ $(document).ready(function() {
     renderAnswers();
     //start func called
     start();
-    //timer counts down from 60 seconds (displayed on screen)
-    $("#timer").text("1:00");
+    //timer counts down from 120 seconds (displayed on screen)
+    $("#timer").text("2:00");
   });
 
   function clickedButton(e) {
