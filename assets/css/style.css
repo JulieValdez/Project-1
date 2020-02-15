@@ -1,5 +1,5 @@
 body {
-    background-color: plum;
+    background-color: rgb(205, 195, 50);
     
 }
 
@@ -23,7 +23,7 @@ h3 {
 }
 
 #header {
-    background-color: #66CCFF;
+    background-color: #ff8566;
     color: white;
     text-align: center;
     padding: 10px;
@@ -31,7 +31,16 @@ h3 {
     font-size: 48px;
     text-shadow: 4px 4px 4px #aaa;
 }
-
+ 
+ #instructions{
+    background-color: #ff8566;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-family: 'Lobster', arial;
+    font-size: 20px;
+    text-shadow: 4px 4px 4px #aaa;
+}
 #content {
     padding: 10px;
 }
