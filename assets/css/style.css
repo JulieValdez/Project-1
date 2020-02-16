@@ -63,6 +63,11 @@ h3 {
   flex-direction: column;
 }
 
+.container {
+        min-height: 100%;
+        overflow: hidden;
+}
+
 /*REEEEEEEEEEESPONSIVE*/
 @media (max-width: 650px) {
   #container {
