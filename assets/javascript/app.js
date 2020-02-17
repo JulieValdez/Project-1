@@ -23,14 +23,20 @@ $(document).ready(function() {
   });
 
   $(document).on("click", ".playAgain", function(e) {
+    // // Clear localStorage
+    localStorage.clear();
+
+    // Store content into localStorage
+    localStorage.setItem("correct", correct);
+
+    localStorage.setItem("incorrect", incorrect);
+
     window.location.reload();
   });
 
   var queryURL =
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
-    console.log(questionNumber); // 19
-    console.log(questions.length); // 20
     var questionDiv = $("<div>").html(questions[questionNumber].question);
 
     $("#questionCont").append(questionDiv);
@@ -123,7 +129,7 @@ $(document).ready(function() {
     return minutes + ":" + seconds;
   }
 
-  //once start button clicked, 1st question shown and timer counting down from 60 seconds, and gif shows
+  //once start button clicked, 1st question shown and timer counting down from 120 seconds, and gif shows
 
   $("#start-button").on("click", function() {
     $(".starter").hide();
@@ -147,7 +153,7 @@ $(document).ready(function() {
     }
     nextQuestion();
   }
-  //on last question, button changes to 'Finish'
+
   function timeoutOrDone() {
     console.log("timeoutordoneworking");
 
@@ -162,6 +168,19 @@ $(document).ready(function() {
     );
     $("#questionCont").append(correctDisplay);
     $("#questionCont").append(incorrectDisplay);
+
+    var locStorcorrectDisplay = $("<p class='locStorDisplay'>").text(
+      "last game correct: " + localStorage.getItem("correct")
+    );
+    console.log(locStorcorrectDisplay);
+
+    var locStorincorrectDisplay = $("<p class='locStorDisplay'>").text(
+      "last game incorrect: " + localStorage.getItem("incorrect")
+    );
+    console.log(locStorincorrectDisplay);
+
+    $("#questionCont").append(locStorcorrectDisplay);
+    $("#questionCont").append(locStorincorrectDisplay);
 
     playAgainButton = $("<button>");
     playAgainButton.addClass("playAgain btn-block hvr-pulse-shrink");
@@ -179,8 +198,6 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response);
-
       // Retrieving the URL for the image
       var imgURL = response.data.images.fixed_height.url;
       var image = $("<img>")
@@ -188,23 +205,5 @@ $(document).ready(function() {
         .addClass("img-fluid img-thumbnail mx-auto d-block hvr-pulse-shrink");
       $("#gifCont").append(image);
     });
-    console.log("gifs displayed");
   }
-
-  // function resetGame() {
-  //   clockRunning = false;
-  //   time = 120;
-  //   questionNumber = 0;
-  //   correct = 0;
-  //   incorrect = 0;
-
-  //   correctAns;
-  //   displayGifs();
-  //   renderQuestion();
-  //   renderAnswers();
-  //   start();
-  //   $("#timer").text("2:00");
-  //   $(".finalDisplay").hide();
-  //   $(".playAgain").hide();
-  // }
 });
