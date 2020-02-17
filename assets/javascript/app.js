@@ -50,7 +50,7 @@ $(document).ready(function() {
       var answerBtn = answers[i];
 
       answerBtn = $("<button>");
-      answerBtn.addClass("answerBtn");
+      answerBtn.addClass("answerBtn btn-block hvr-pulse-shrink");
       answerBtn.attr("data-name", answers[i]);
       answerBtn.html(answers[i]);
       $("#answerCont").append(answerBtn);
@@ -164,7 +164,7 @@ $(document).ready(function() {
     $("#questionCont").append(incorrectDisplay);
 
     playAgainButton = $("<button>");
-    playAgainButton.addClass("playAgain");
+    playAgainButton.addClass("playAgain btn-block hvr-pulse-shrink");
 
     playAgainButton.text("Play Again");
     $("#questionCont").append(playAgainButton);
@@ -185,7 +185,7 @@ $(document).ready(function() {
       var imgURL = response.data.images.fixed_height.url;
       var image = $("<img>")
         .attr("src", imgURL)
-        .addClass("img-fluid img-thumbnail mx-auto d-block");
+        .addClass("img-fluid img-thumbnail mx-auto d-block hvr-pulse-shrink");
       $("#gifCont").append(image);
     });
     console.log("gifs displayed");
