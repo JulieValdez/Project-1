@@ -156,6 +156,9 @@ $(document).ready(function() {
 
   function timeoutOrDone() {
     console.log("timeoutordoneworking");
+    $("#questionCont").empty();
+    $("#answerCont").empty();
+    $("#gifCont").empty();
 
     clearInterval(intervalId);
     //if timer runs out or...if question Num is less than or equal to questions.length
