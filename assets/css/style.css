@@ -1,7 +1,18 @@
-body {
+/* body {
   background-image: url("../images/gray.jpg");
-  background-size: 75%;
-}
+  background-size: 100%;
+} */
+
+body {
+    background-color: #269;
+    background-image:
+      linear-gradient(rgba(255,255,255,.5) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(255,255,255,.5) 2px, transparent 2px),
+      linear-gradient(rgba(255,255,255,.28) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  }
 
 p {
   text-align: center;
@@ -19,27 +30,36 @@ h3 {
 #container {
   background-color: white;
   width: 500px;
-  margin: auto;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 #header {
-  background-color: #66ccff;
+  background-color: #226699;
   color: white;
   text-align: center;
   padding: 10px;
   font-family: "Lobster", arial;
   font-size: 48px;
-  text-shadow: 4px 4px 4px #aaa;
+  width: max-content;
+  /* text-shadow: 4px 4px 4px #aaa; */
 }
 
-#button {
+.instructions {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+#start-button {
   align-content: center;
+  line-height: 5rem;
 }
 
 .footer {
   padding: 10px;
   color: black;
   text-align: center;
+  position: sticky;
 }
 
 #timer {
@@ -63,13 +83,9 @@ h3 {
   flex-direction: column;
 }
 
-.container {
-        min-height: 100%;
-        overflow: hidden;
-}
 
 /*REEEEEEEEEEESPONSIVE*/
-@media (max-width: 650px) {
+/* @media (max-width: 650px) {
   #container {
     width: 100%;
   }
@@ -77,4 +93,4 @@ h3 {
   p {
     font-size: 1.5em;
   }
-}
+} */

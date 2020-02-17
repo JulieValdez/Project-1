@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/hover.css" />
   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   <title>Project-1 group-B</title>
 </head>
@@ -20,7 +21,7 @@
   <div class="container bg-light">
 
     <div class="topHeader">
-      <div class="container">
+      <div class="container-fluid">
         <p class="display-4 w-auto text-center" id="header">Trivial Party</p>
       </div>
     </div>
@@ -35,10 +36,10 @@
     <div class="gameContent">
       <!-- Question Container -->
       <div id="questionCont"></div>
-      <hr class="mt-2 mb-3">
+      <hr class="mt-2 mb-2">
       <div id="answerCont"></div>
       <!-- Gif Container -->
-      <hr class="mt-2 mb-3">
+      <hr class="mt-2 mb-2">
       <div id="gifCont"></div>
     </div>
 
@@ -48,10 +49,10 @@
       <div class="col-md">
         <img class="img-fluid img-thumbnail mx-auto d-block" src="https://media2.giphy.com/media/tXL4FHPSnVJ0A/200_d.gif?cid=fe1dc334b0f4620cabfed41f9474028bbcf0b774821619e4&rid=200.gif" alt="">
       </div>
-      <div class="col-md">
+      <div class="col-md instructions">
         <p>Test your trivia knowledge. </p>
         <p> You have 2 minutes to answer all 20 questions. </p>
-        <button id="start-button" type="button" class="btn text-center btn-primary btn-lg btn-block">Play Already</button>
+        <button id="start-button" type="button" class="btn text-center btn-danger btn-lg btn-block hvr-float-shadow">Play Already</button>
       </div>
       <div class="col-md">
         <img class="img-fluid img-thumbnail mx-auto d-block" src="https://media2.giphy.com/media/8TT8VjZTZGWQw/200.gif?cid=fe1dc334b0f4620cabfed41f9474028bbcf0b774821619e4&rid=200.gif" alt="">
