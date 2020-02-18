@@ -38,6 +38,7 @@ $(document).ready(function() {
     "https://opentdb.com/api.php?amount=20&category=11&difficulty=medium&type=multiple";
   function renderQuestion() {
     var questionDiv = $("<div>").html(questions[questionNumber].question);
+    questionDiv.addClass("slit-in-horizontal");
 
     $("#questionCont").append(questionDiv);
   }
