@@ -27,3 +27,6 @@ Giphy API
 OpenTrivia API
 Hover.css Library
 Local Storage
+
+#Repo project
+https://julievaldez.github.io/Project-1/
